@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce = 2.0f;
     public float speed = 5;
 
+    private CapsuleCollider playerCollider;
+
 
     public bool isGrounded;
     Rigidbody rb;
@@ -15,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         jump = new Vector3(0.0f, 3.0f, 0.0f);
+        playerCollider = GetComponent<CapsuleCollider>();
     }
 
     private void handleMovement()

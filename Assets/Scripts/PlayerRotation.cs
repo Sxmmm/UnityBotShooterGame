@@ -19,7 +19,7 @@ public class PlayerRotation : MonoBehaviour
 
     private void Awake()
     {
-        LockCursor();
+        lockCursor();
         xAxisClamp = 0.0f;
 
     }
@@ -31,14 +31,14 @@ public class PlayerRotation : MonoBehaviour
 
     private void Update()
     {
-        CameraRotation();
+        cameraRotation();
         if (aimAssist)
         {
-            AimAssistance();
+            aimAssistance();
         }
     }
 
-    private void AimAssistance()
+    private void aimAssistance()
     {
 
         int layerMask = 1 << 8;
@@ -62,12 +62,12 @@ public class PlayerRotation : MonoBehaviour
         }
     }
 
-    private void LockCursor()
+    private void lockCursor()
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    private void CameraRotation()
+    private void cameraRotation()
     {
         float mouseX = Input.GetAxis("Mouse X") * rotSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * rotSensitivity * Time.deltaTime;
@@ -78,20 +78,20 @@ public class PlayerRotation : MonoBehaviour
         {
             xAxisClamp = 90.0f;
             mouseY = 0.0f;
-            ClampXAxisRotationToValue(270.0f);
+            clampXAxisRotationToValue(270.0f);
         }
         else if (xAxisClamp < -90.0f)
         {
             xAxisClamp = -90.0f;
             mouseY = 0.0f;
-            ClampXAxisRotationToValue(90.0f);
+            clampXAxisRotationToValue(90.0f);
         }
 
         transform.Rotate(Vector3.left * mouseY);
         playerBody.Rotate(Vector3.up * mouseX);
     }
 
-    private void ClampXAxisRotationToValue(float value)
+    private void clampXAxisRotationToValue(float value)
     {
         Vector3 eulerRotation = transform.eulerAngles;
         eulerRotation.x = value;
