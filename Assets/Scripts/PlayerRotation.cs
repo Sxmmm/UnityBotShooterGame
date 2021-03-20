@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerRotation : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class PlayerRotation : MonoBehaviour
     private Transform playerBody;
 
     private float xAxisClamp;
+
+    [SerializeField] private Slider sensSlider;
 
     private void Awake()
     {
@@ -96,5 +99,12 @@ public class PlayerRotation : MonoBehaviour
         Vector3 eulerRotation = transform.eulerAngles;
         eulerRotation.x = value;
         transform.eulerAngles = eulerRotation;
+    }
+
+    public void updateSensitivity()
+    {
+        Debug.Log(sensSlider.value);
+        rotSensitivity = sensSlider.value * 1000;
+        oldrotSensitivity = sensSlider.value * 1000;
     }
 }
